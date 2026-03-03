@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big Five Duty Free – Pre-Order Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rust:#B5341F;--rust-d:#8C2415;--rust-l:#fdf1ee;
+  --dark:#141414;--mid:#2a2a2a;--light:#f6f4f1;
+  --border:#e2ddd8;--text:#1e1e1e;--muted:#8a8480;
+  --white:#fff;--green:#1f7a4a;--gold:#9a7b2f;--gold-l:#fdf8ec;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;background:var(--light);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+.page{display:none;flex-direction:column;min-height:100vh}
+.page.active{display:flex}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--dark);color:#888;font-size:11px;text-align:center;padding:6px 20px;letter-spacing:1.2px;text-transform:uppercase}
+
+/* ── HEADER ── */
+header{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;position:sticky;top:0;z-index:200;box-shadow:0 1px 12px rgba(0,0,0,.05)}
+.hi{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.logo-main{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--dark);letter-spacing:2px;line-height:1}
+.logo-sub{font-size:8.5px;letter-spacing:4px;color:var(--rust);text-transform:uppercase}
+nav{display:flex;gap:28px;align-items:center}
+nav a{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);cursor:pointer;transition:color .2s;padding-bottom:2px;border-bottom:1.5px solid transparent}
+nav a:hover,nav a.on{color:var(--rust);border-color:var(--rust)}
+.hright{display:flex;align-items:center;gap:12px}
+.wlbtn{background:none;border:1px solid var(--border);padding:7px 16px;font-size:11px;font-weight:600;letter-spacing:.8px;cursor:pointer;color:var(--muted);font-family:'Jost',sans-serif;transition:all .2s;display:flex;align-items:center;gap:7px}
+.wlbtn:hover{border-color:var(--rust);color:var(--rust)}
+.cbtn{background:var(--rust);color:white;border:none;padding:10px 20px;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .2s}
+.cbtn:hover{background:var(--rust-d)}
+.cc{background:white;color:var(--rust);border-radius:50%;width:19px;height:19px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ── BANDS & BREADCRUMB ── */
+.band{background:var(--dark);color:white;padding:30px 48px}
+.band-i{max-width:1280px;margin:0 auto}
+.band h1{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:.5px}
+.band p{font-size:11px;color:#666;margin-top:4px;letter-spacing:.5px}
+.bc{max-width:1280px;margin:0 auto;padding:11px 48px;font-size:11px;color:var(--muted);letter-spacing:.3px}
+.bc a{color:var(--muted);cursor:pointer;transition:color .2s}.bc a:hover{color:var(--rust)}.bc span{color:var(--rust)}
+
+/* ── CATEGORY TABS ── */
+.cattabs{max-width:1280px;margin:0 auto;padding:18px 48px 0;display:flex;gap:8px;flex-wrap:wrap}
+.cattab{padding:7px 18px;border:1px solid var(--border);background:white;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'Jost',sans-serif}
+.cattab:hover{border-color:var(--rust);color:var(--rust)}
+.cattab.on{background:var(--rust);border-color:var(--rust);color:white}
+
+/* ── SHOP GRID ── */
+.shopwrap{max-width:1280px;margin:0 auto;padding:24px 48px 60px;flex:1}
+.shophead{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.shoptitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.shopcount{font-size:11px;color:var(--muted);letter-spacing:.5px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}}
+.pcard{background:white;border:1px solid var(--border);cursor:pointer;transition:box-shadow .25s,transform .25s;overflow:hidden}
+.pcard:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-3px)}
+.pcard.hl{border:2px solid var(--rust)}
+.cimg{width:100%;height:210px;background:#f8f6f3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.cimg img{width:100%;height:100%;object-fit:contain;padding:18px;transition:transform .35s}
+.pcard:hover .cimg img{transform:scale(1.06)}
+.cbadge{position:absolute;top:10px;left:10px;color:white;font-size:9.5px;font-weight:700;letter-spacing:1px;padding:3px 10px;text-transform:uppercase}
+.cbadge.rust{background:var(--rust)}.cbadge.gold{background:var(--gold)}.cbadge.promo{background:var(--green)}
+.cbody{padding:14px 16px 16px}
+.cbrand{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.cname{font-size:13px;font-weight:500;line-height:1.35;margin-bottom:8px;min-height:36px}
+.cprices{display:flex;align-items:baseline;gap:8px}
+.cprice{font-size:16px;font-weight:700;color:var(--rust)}
+.corigprice{font-size:12px;color:var(--muted);text-decoration:line-through}
+.csize{font-size:10.5px;color:var(--muted);margin-top:3px}
+
+/* ── PRODUCT PAGE ── */
+.prodwrap{max-width:1280px;margin:0 auto;padding:28px 48px 64px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;flex:1}
+.galmain{background:#f8f6f3;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-height:440px;position:relative;overflow:hidden}
+.galmain img{width:100%;max-height:440px;object-fit:contain;padding:36px;transition:opacity .3s}
+.gbadge{position:absolute;top:14px;left:14px;color:white;font-size:9.5px;font-weight:700;letter-spacing:1px;padding:4px 13px;text-transform:uppercase}
+.galthumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.gthumb{border:1px solid var(--border);background:#f8f6f3;height:76px;cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:border-color .2s;padding:6px}
+.gthumb:hover,.gthumb.on{border-color:var(--rust);border-width:2px}
+.gthumb img{width:100%;height:100%;object-fit:contain}
+
+.pbrand{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.pname{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.2;margin-bottom:6px}
+.psizetag{display:inline-block;font-size:11px;color:var(--muted);background:var(--border);padding:3px 11px;margin-bottom:18px;letter-spacing:.5px}
+.pprices{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.pprice{font-size:30px;font-weight:700;color:var(--rust);font-family:'Cormorant Garamond',serif}
+.porigprice{font-size:16px;color:var(--muted);text-decoration:line-through}
+.psaving{font-size:11px;background:var(--green);color:white;padding:2px 8px;font-weight:600;letter-spacing:.5px}
+.pstock{font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:18px}
+.pstock::before{content:'✓';font-size:11px}
+
+.aybox{background:var(--gold-l);border:1px solid #e8d898;border-left:4px solid var(--gold);padding:13px 16px;font-size:13px;color:#6b5200;margin-bottom:16px;line-height:1.7;display:flex;gap:11px;align-items:flex-start}
+.aybox .ico{font-size:17px;flex-shrink:0;margin-top:2px}
+.prebook{background:var(--rust-l);border:1px solid #eac8c0;border-left:4px solid var(--rust);padding:13px 16px;font-size:12.5px;color:#7a1a10;margin-bottom:20px;line-height:1.7}
+.prebook strong{display:block;margin-bottom:3px;color:#5a1008;font-size:10px;letter-spacing:1.2px;text-transform:uppercase}
+.pdesc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+
+.qrow{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.qlbl{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
+.qctrl{display:flex;align-items:center;border:1px solid var(--border)}
+.qctrl button{width:40px;height:44px;border:none;background:white;font-size:18px;cursor:pointer;font-family:'Jost',sans-serif;transition:background .15s;color:var(--text)}
+.qctrl button:hover{background:var(--light)}
+.qctrl input{width:56px;height:44px;border:none;border-left:1px solid var(--border);border-right:1px solid var(--border);text-align:center;font-size:15px;font-family:'Jost',sans-serif;color:var(--text)}
+.btnadd{width:100%;padding:15px;background:var(--rust);color:white;border:none;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-bottom:10px}
+.btnadd:hover{background:var(--rust-d)}.btnadd.done{background:var(--green)}
+.btnwl{width:100%;padding:13px;background:white;color:var(--text);border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btnwl:hover{border-color:var(--rust);color:var(--rust)}.btnwl.on{color:var(--rust);border-color:var(--rust)}
+.pmeta{font-size:11.5px;color:var(--muted);line-height:2.4;margin-top:18px;border-top:1px solid var(--border);padding-top:16px}
+.pmeta strong{color:var(--text);font-weight:600}
+
+/* ── CART ── */
+.cartwrap{max-width:1180px;margin:0 auto;padding:32px 48px 64px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start;flex:1}
+.sectiontitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--rust);display:inline-block}
+.ctable{width:100%;border-collapse:collapse}
+.ctable th{text-align:left;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:0 0 13px;border-bottom:1px solid var(--border);font-weight:600}
+.ctable td{padding:20px 8px 20px 0;border-bottom:1px solid var(--border);vertical-align:middle}
+.citcell{display:flex;align-items:center;gap:18px}
+.cthumb{width:78px;height:88px;background:#f8f6f3;border:1px solid var(--border);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px}
+.cthumb img{width:100%;height:100%;object-fit:contain}
+.ciname{font-weight:600;font-size:14px;margin-bottom:2px}
+.cisub{font-size:11.5px;color:var(--muted)}
+.cprice{font-weight:700;color:var(--rust);font-size:15px;white-space:nowrap;font-family:'Cormorant Garamond',serif}
+.rmbtn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:4px 8px;transition:color .2s;font-family:'Jost',sans-serif}
+.rmbtn:hover{color:var(--rust)}
+.empty{text-align:center;padding:64px 0;color:var(--muted)}
+.empty h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--text);margin-bottom:12px}
+.btncont{margin-top:22px;padding:12px 30px;background:var(--rust);color:white;border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btncont:hover{background:var(--rust-d)}
+
+.sumbox{background:white;border:1px solid var(--border);padding:28px;position:sticky;top:90px}
+.sumtitle{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.sumrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-size:13.5px;border-bottom:1px solid var(--border)}
+.sumrow.tot{font-size:15px;font-weight:700;border:none;padding-top:15px}
+.sumrow.tot .sv{color:var(--rust);font-size:22px;font-family:'Cormorant Garamond',serif}
+.sl{color:var(--muted)}.sfree{color:var(--green);font-weight:600;font-size:11.5px}
+.btnco{width:100%;padding:15px;background:var(--rust);color:white;border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:20px}
+.btnco:hover{background:var(--rust-d)}
+.lnkcont{display:block;text-align:center;margin-top:12px;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;transition:color .2s}
+.lnkcont:hover{color:var(--rust)}
+
+/* ── CHECKOUT ── */
+.costeps{max-width:800px;margin:28px auto 22px;padding:0 48px;display:flex;align-items:center}
+.cst{display:flex;align-items:center;gap:10px}
+.csn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--border);color:var(--muted);flex-shrink:0;transition:all .3s}
+.cst.done .csn{background:var(--green);color:white}.cst.active .csn{background:var(--rust);color:white}
+.csl{font-size:10px;font-weight:700;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase}
+.cst.active .csl{color:var(--rust)}.cst.done .csl{color:var(--green)}
+.cline{flex:1;height:2px;background:var(--border);margin:0 12px}
+.cline.done{background:var(--green)}
+.cowrap{max-width:1100px;margin:0 auto;padding:0 48px 64px;display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start;flex:1}
+.fcard{background:white;border:1px solid var(--border);padding:28px;margin-bottom:20px}
+.fctitle{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.frow.full{grid-template-columns:1fr}.frow.three{grid-template-columns:1fr 1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:5px}
+label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+label .req{color:var(--rust)}
+input,select{padding:11px 14px;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:14px;color:var(--text);background:white;outline:none;transition:border-color .2s;width:100%}
+input:focus,select:focus{border-color:var(--rust)}
+input.pre{background:#f6f4f1;color:#666;cursor:default}
+.fpre{background:var(--rust-l);border:1px solid #eac8c0;border-left:4px solid var(--rust);padding:12px 16px;margin-bottom:18px;font-size:12px;color:#7a1a10;line-height:1.9}
+.fpre strong{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;color:#5a1008}
+.btnplace{width:100%;padding:16px;background:var(--rust);color:white;border:none;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btnplace:hover{background:var(--rust-d)}
+.secline{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--muted);margin-top:11px}
+.cobox{background:white;border:1px solid var(--border);padding:26px;position:sticky;top:90px}
+.coitem{display:flex;gap:14px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.coimg{width:64px;height:72px;background:#f8f6f3;border:1px solid var(--border);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:5px}
+.coimg img{width:100%;height:100%;object-fit:contain}
+.coname{font-size:13px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.cosub{font-size:11px;color:var(--muted)}
+.coprice{font-weight:700;color:var(--rust);font-size:14px;margin-top:4px;font-family:'Cormorant Garamond',serif}
+.hiw{background:var(--light);border:1px solid var(--border);padding:14px 16px;margin-top:18px;font-size:12px;color:var(--muted);line-height:2}
+.hiw strong{color:var(--text);display:block;margin-bottom:4px;font-size:10px;letter-spacing:.8px;text-transform:uppercase}
+
+/* ── CONFIRMATION ── */
+.confwrap{max-width:760px;margin:44px auto 80px;padding:0 48px;text-align:center;flex:1}
+.conficon{width:80px;height:80px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;color:white;animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.conftitle{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:10px}
+.confsub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.8}
+.confcard{background:white;border:1px solid var(--border);padding:28px;text-align:left;margin-bottom:20px}
+.reflbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.refval{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--rust);font-weight:700;margin-bottom:18px;letter-spacing:1px}
+.confitem{display:flex;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid var(--border)}
+.confimgbox{width:68px;height:76px;background:#f8f6f3;border:1px solid var(--border);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:5px}
+.confimgbox img{width:100%;height:100%;object-fit:contain}
+.confdet{flex:1}
+.confname{font-size:14px;font-weight:600;margin-bottom:2px}
+.confsub2{font-size:12px;color:var(--muted)}
+.confprice{font-weight:700;color:var(--rust);font-size:17px;font-family:'Cormorant Garamond',serif}
+.conftotrow{display:flex;justify-content:space-between;align-items:center;padding-top:14px;font-weight:700;font-size:15px}
+.conftotval{color:var(--rust);font-size:24px;font-family:'Cormorant Garamond',serif}
+.confgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;text-align:left}
+.ci{background:white;border:1px solid var(--border);padding:18px}
+.cilbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.cival{font-size:13px;font-weight:500;line-height:1.75}
+.remind{background:var(--gold-l);border:1px solid #e8d898;border-left:4px solid var(--gold);padding:14px 18px;text-align:left;font-size:12.5px;color:#6b5200;line-height:1.9;margin-bottom:28px}
+.remind strong{color:#4a3800}
+.btnback{padding:13px 32px;background:var(--rust);color:white;border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btnback:hover{background:var(--rust-d)}
+.btnprint{margin-left:12px;padding:13px 32px;background:white;color:var(--text);border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btnprint:hover{border-color:var(--rust);color:var(--rust)}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:22px;right:22px;background:var(--green);color:white;padding:13px 22px;font-size:13px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.18);transform:translateX(150%);transition:transform .3s ease;z-index:999;display:flex;align-items:center;gap:10px;max-width:340px;letter-spacing:.3px}
+.toast.show{transform:translateX(0)}
+footer{background:var(--dark);color:#555;text-align:center;padding:24px 48px;font-size:11.5px;letter-spacing:.5px;margin-top:auto}
+footer span{color:var(--rust)}
+
+/* promo badge strikethrough price */
+.promo-tag{font-size:10px;background:var(--green);color:white;padding:1px 7px;letter-spacing:.5px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">✓ Done</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: SHOP
+══════════════════════════════════════ -->
+<div class="page active" id="page-shop">
+  <div class="topbar">Pre-order online · Collect in-store · Pay on collection · OR Tambo International Airport · JNB</div>
+  <header><div class="hi">
+    <div class="logo" onclick="goTo('page-shop')">
+      <div class="logo-main">BIG FIVE</div><div class="logo-sub">Duty Free</div>
+    </div>
+    <nav>
+      <a class="on" onclick="goTo('page-shop')">Pre-Order Online</a>
+      <a onclick="toast('About Us page coming soon')">About Us</a>
+      <a onclick="toast('Contact page coming soon')">Contact</a>
+    </nav>
+    <div class="hright">
+      <button class="wlbtn" onclick="openWishlist()">♡ Wishlist <span id="wc1">0</span></button>
+      <button class="cbtn" onclick="goTo('page-cart')">🛒 Basket <span class="cc" id="cc1">0</span></button>
+    </div>
+  </div></header>
+
+  <div class="band"><div class="band-i">
+    <h1 id="shopPageTitle">All Products</h1>
+    <p id="shopPageSub">Browse our full duty-free range at OR Tambo International Airport</p>
+  </div></div>
+  <div class="bc"><a onclick="goTo('page-shop')">Home</a> › <a onclick="goTo('page-shop')">Pre-Order Online</a> › <span id="shopBcLabel">All Products</span></div>
+
+  <div class="cattabs" id="cattabs">
+    <button class="cattab on" onclick="filterCat('all',this)">All Products</button>
+    <button class="cattab" onclick="filterCat('womens',this)">Women's Fragrances</button>
+    <button class="cattab" onclick="filterCat('mens',this)">Men's Fragrances</button>
+    <button class="cattab" onclick="filterCat('whisky',this)">Whisky</button>
+    <button class="cattab" onclick="filterCat('vodka',this)">Vodka</button>
+    <button class="cattab" onclick="filterCat('gin',this)">Gin</button>
+    <button class="cattab" onclick="filterCat('wine',this)">Wine &amp; Champagne</button>
+  </div>
+
+  <div class="shopwrap">
+    <div class="shophead">
+      <div class="shoptitle" id="shopGridTitle">All Products</div>
+      <div class="shopcount" id="shopcount">Loading...</div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: PRODUCT
+══════════════════════════════════════ -->
+<div class="page" id="page-product">
+  <div class="topbar">Pre-order online · Collect in-store · Pay on collection · OR Tambo International Airport · JNB</div>
+  <header><div class="hi">
+    <div class="logo" onclick="goTo('page-shop')"><div class="logo-main">BIG FIVE</div><div class="logo-sub">Duty Free</div></div>
+    <nav><a onclick="goTo('page-shop')">← Browse Products</a></nav>
+    <div class="hright">
+      <button class="wlbtn" onclick="toggleWL()">♡ Wishlist <span id="wc2">0</span></button>
+      <button class="cbtn" onclick="goTo('page-cart')">🛒 Basket <span class="cc" id="cc2">0</span></button>
+    </div>
+  </div></header>
+  <div class="bc"><a onclick="goTo('page-shop')">Home</a> › <a onclick="goTo('page-shop')">Browse</a> › <span id="pbc">Product</span></div>
+
+  <div class="prodwrap">
+    <div>
+      <div class="galmain">
+        <div class="gbadge" id="gbadge" style="display:none"></div>
+        <img id="mainimg" src="" alt="Product" style="opacity:0" onload="this.style.opacity=1">
+      </div>
+      <div class="galthumbs" id="gthumbs"></div>
+    </div>
+    <div>
+      <div class="pbrand" id="pbrand"></div>
+      <div class="pname" id="pname"></div>
+      <span class="psizetag" id="psize"></span>
+      <div class="pprices" id="pprices"></div>
+      <div class="pstock" id="pstock"></div>
+      <div class="aybox" id="aybox" style="display:none"><span class="ico">🤖</span><span id="aytxt"></span></div>
+      <div class="prebook"><strong>Pre-Order &amp; Collect In-Store</strong>Place your order 48 hours before your flight. Your item will be reserved and waiting at Big Five Duty Free, Terminal A, OR Tambo. Pay on collection.</div>
+      <div class="pdesc" id="pdesc"></div>
+      <div class="qrow">
+        <span class="qlbl">Quantity</span>
+        <div class="qctrl">
+          <button onclick="chgQ(-1)">−</button>
+          <input type="number" id="qty" value="1" min="1" max="10" readonly>
+          <button onclick="chgQ(1)">+</button>
+        </div>
+      </div>
+      <button class="btnadd" id="addbtn" onclick="addCart()">ADD TO BASKET</button>
+      <button class="btnwl" id="wlbtn" onclick="toggleWL()">♡ &nbsp;ADD TO WISHLIST</button>
+      <div class="pmeta">
+        <strong>SKU:</strong> <span id="psku"></span><br>
+        <strong>Category:</strong> <span id="pcat"></span><br>
+        <strong>Airport:</strong> OR Tambo International (JNB)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: CART
+══════════════════════════════════════ -->
+<div class="page" id="page-cart">
+  <div class="topbar">Pre-order online · Collect in-store · Pay on collection · OR Tambo International Airport · JNB</div>
+  <header><div class="hi">
+    <div class="logo" onclick="goTo('page-shop')"><div class="logo-main">BIG FIVE</div><div class="logo-sub">Duty Free</div></div>
+    <nav><a onclick="goTo('page-shop')">← Continue Shopping</a></nav>
+    <div class="hright"><button class="cbtn" onclick="goTo('page-cart')">🛒 Basket <span class="cc" id="cc3">0</span></button></div>
+  </div></header>
+  <div class="band"><div class="band-i"><h1>Your Basket</h1><p>Review your items before checkout</p></div></div>
+  <div class="cartwrap">
+    <div>
+      <div class="sectiontitle">Items in Your Basket</div>
+      <div id="cartbody"></div>
+    </div>
+    <div><div class="sumbox">
+      <div class="sumtitle">Order Summary</div>
+      <div class="sumrow"><span class="sl">Subtotal</span><span id="ssub">R0.00</span></div>
+      <div class="sumrow"><span class="sl">Duty Free Saving</span><span class="sfree">Included</span></div>
+      <div class="sumrow"><span class="sl">Collection</span><span class="sfree">Free</span></div>
+      <div class="sumrow"><span class="sl">Payment</span><span>On collection</span></div>
+      <div class="sumrow tot"><span>Total</span><span class="sv" id="stot">R0.00</span></div>
+      <button class="btnco" onclick="goCheckout()">PROCEED TO CHECKOUT →</button>
+      <a class="lnkcont" onclick="goTo('page-shop')">← Continue shopping</a>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: CHECKOUT
+══════════════════════════════════════ -->
+<div class="page" id="page-checkout">
+  <div class="topbar">Pre-order online · Collect in-store · Pay on collection · OR Tambo International Airport · JNB</div>
+  <header><div class="hi">
+    <div class="logo" onclick="goTo('page-shop')"><div class="logo-main">BIG FIVE</div><div class="logo-sub">Duty Free</div></div>
+    <nav><a onclick="goTo('page-cart')">← Back to Basket</a></nav>
+    <div class="hright"><button class="cbtn" onclick="goTo('page-cart')">🛒 Basket <span class="cc" id="cc4">0</span></button></div>
+  </div></header>
+  <div class="band"><div class="band-i"><h1>Checkout</h1><p>Complete your pre-order details</p></div></div>
+  <div class="costeps">
+    <div class="cst done"><div class="csn">✓</div><div class="csl">Basket</div></div>
+    <div class="cline done"></div>
+    <div class="cst active"><div class="csn">2</div><div class="csl">Details</div></div>
+    <div class="cline"></div>
+    <div class="cst"><div class="csn">3</div><div class="csl">Confirm</div></div>
+  </div>
+  <div class="cowrap">
+    <div>
+      <div class="fcard">
+        <div class="fctitle">👤 Personal Details</div>
+        <div class="frow">
+          <div class="fg"><label>First Name <span class="req">*</span></label><input id="fname" placeholder="Sarah"></div>
+          <div class="fg"><label>Last Name <span class="req">*</span></label><input id="lname" placeholder="Johnson"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Email <span class="req">*</span></label><input id="email" type="email" placeholder="your@email.com"></div>
+          <div class="fg"><label>Mobile <span class="req">*</span></label><input id="phone" type="tel" placeholder="+27 82 000 0000"></div>
+        </div>
+        <div class="frow full">
+          <div class="fg"><label>Passport Number <span class="req">*</span></label><input id="passport" placeholder="Required for duty-free collection"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fctitle">✈️ Flight Details</div>
+        <div class="fpre" id="flightprefill">
+          <strong>Pre-filled from your Ayanda conversation</strong>
+          <span id="flightprefilltext">Flying from OR Tambo (JNB)</span>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Departure Airport <span class="req">*</span></label><input class="pre" value="OR Tambo International (JNB)" readonly></div>
+          <div class="fg"><label>Destination <span class="req">*</span></label><input class="pre" id="destInput" value="International" readonly></div>
+        </div>
+        <div class="frow three">
+          <div class="fg"><label>Flight Number <span class="req">*</span></label><input id="flight" placeholder="e.g. SA231"></div>
+          <div class="fg"><label>Departure Date <span class="req">*</span></label><input id="depdate" type="date"></div>
+          <div class="fg"><label>Departure Time</label><input id="deptime" type="time"></div>
+        </div>
+        <div class="frow full">
+          <div class="fg"><label>Collection Point</label>
+            <select id="collpt">
+              <option>OR Tambo – Terminal A, International Departures (Main Store)</option>
+              <option>OR Tambo – International Arrivals Store</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fctitle">📝 Additional Notes</div>
+        <div class="frow full">
+          <div class="fg"><label>Order Notes (optional)</label><input id="notes" placeholder="e.g. Gift wrap requested, please call on arrival"></div>
+        </div>
+      </div>
+      <button class="btnplace" onclick="placeOrder()">PLACE PRE-ORDER →</button>
+      <div class="secline">🔒 Secure · Payment made in-store on collection</div>
+    </div>
+    <div><div class="cobox">
+      <div class="sumtitle">Your Order</div>
+      <div id="coitems"></div>
+      <div class="sumrow"><span class="sl">Collection</span><span class="sfree">Free</span></div>
+      <div class="sumrow"><span class="sl">Payment</span><span>On collection</span></div>
+      <div class="sumrow tot"><span>Total</span><span class="sv" id="cotot">R0.00</span></div>
+      <div class="hiw"><strong>How pre-order works</strong>
+        1. Complete this form to reserve<br>
+        2. Receive confirmation via email &amp; SMS<br>
+        3. Collect &amp; pay at the store before your flight
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: CONFIRMATION
+══════════════════════════════════════ -->
+<div class="page" id="page-confirm">
+  <div class="topbar">Pre-order online · Collect in-store · Pay on collection · OR Tambo International Airport · JNB</div>
+  <header><div class="hi">
+    <div class="logo" onclick="resetAll()"><div class="logo-main">BIG FIVE</div><div class="logo-sub">Duty Free</div></div>
+    <nav></nav><div class="hright"></div>
+  </div></header>
+  <div class="confwrap">
+    <div class="conficon">✓</div>
+    <div class="conftitle">Pre-Order Confirmed!</div>
+    <div class="confsub">Your item(s) have been reserved at Big Five Duty Free, OR Tambo International Airport.<br>A confirmation has been sent to your email and mobile number.</div>
+    <div class="confcard">
+      <div class="reflbl">Order Reference</div>
+      <div class="refval" id="confref">BF-2026-XXXXX</div>
+      <div id="confitems"></div>
+      <div class="conftotrow"><span>Total (payable on collection)</span><span class="conftotval" id="conftotal">R0.00</span></div>
+    </div>
+    <div class="confgrid">
+      <div class="ci"><div class="cilbl">Collection Point</div><div class="cival">OR Tambo International<br>Terminal A, Departures<br>Big Five Duty Free</div></div>
+      <div class="ci"><div class="cilbl">Flight Details</div><div class="cival" id="confflight">—</div></div>
+      <div class="ci"><div class="cilbl">What to bring</div><div class="cival">Your <strong>passport</strong> &amp; this order reference</div></div>
+      <div class="ci"><div class="cilbl">Payment</div><div class="cival">Payable in-store on collection<br><span style="font-size:12px;color:var(--muted);font-weight:400">Card &amp; cash accepted</span></div></div>
+    </div>
+    <div class="remind"><strong>⏰ Reminder:</strong> Please arrive at Big Five Duty Free at least <strong>30 minutes before your boarding gate closes</strong>. Your items will be held under your name and passport number.</div>
+    <button class="btnback" onclick="resetAll()">← BACK TO STORE</button>
+    <button class="btnprint" onclick="window.print()">🖨 PRINT CONFIRMATION</button>
+  </div>
+</div>
+
+<footer>© 2026 <span>Big Five Duty Free</span> · Terminal A, OR Tambo International Airport · Demonstration for ACSA Ayanda Assistant</footer>
+
+<script>
+// ══════════════════════════════════════
+// PRODUCT DATABASE — matched to MockAPI + your images
+// ══════════════════════════════════════
+const PRODUCTS = [
+  // WOMEN'S FRAGRANCES
+  {sku:"060047073",brand:"Lancôme",name:"La Vie est Belle Eau de Parfum 50ml",size:"50ml",price:1865,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"Life is beautiful in this iconic feminine floral-gourmand. Precious iris, jasmine and orange blossom warmed with praline and vanilla. A timeless gift any woman would treasure.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534694/559302_Lancome_La_vie_est_Belle-50ml_EDPS-300x300_hvibcx.jpg",tags:"fragrance,womens,premium,gift,popular",ayanda:true},
+  {sku:"060047072",brand:"Lancôme",name:"La Vie est Belle Eau de Parfum 75ml",size:"75ml",price:2295,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"The iconic La Vie est Belle fragrance in a generous 75ml bottle. The same luminous iris-praline-vanilla signature, with even more to enjoy.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534721/559303_Lancome_La_vie_est_Belle_EDPS-300x300_kcpyfi.jpg",tags:"fragrance,womens,premium,gift",ayanda:false},
+  {sku:"060047331",brand:"Lancôme",name:"La Vie est Belle Gift Set",size:"50ml + body lotion",price:1895,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"Exclusive gift set pairing the iconic La Vie est Belle Eau de Parfum 50ml with a matching 50ml body lotion. Perfect for gifting.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/1020699_Lancome_La_Vie_SET-300x300_bvnn0e.jpg",tags:"fragrance,womens,gift set",ayanda:false},
+  {sku:"060049218",brand:"Lancôme",name:"Idole Eau de Parfum 50ml",size:"50ml",price:1740,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"A luminous floral fragrance for generous and committed women. Fresh bergamot and rose on a base of white musk. Light, confident and modern.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/1395354_Lancome_Idole_EDPS_50ml-300x300_fqaqyw.jpg",tags:"fragrance,womens,floral,gift",ayanda:false},
+  {sku:"060048651",brand:"Lancôme",name:"Trésor Eau de Parfum 30ml",size:"30ml",price:899,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"Trésor — the legendary Lancôme fragrance. A rich, velvety rose at its heart with apricot blossom and iris. Classic and timeless.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534694/1208988_Lancome-Tresor_EDPS_30ml-300x300_c0qr20.jpg",tags:"fragrance,womens,classic,gift",ayanda:false},
+  {sku:"060048471",brand:"Carolina Herrera",name:"Good Girl Eau de Parfum 100ml",size:"100ml",price:2499,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"Good Girl — a bold seductive contrast between the lightness of jasmine and tuberose and the darkness of tonka bean and cocoa. Housed in an iconic stiletto bottle she will treasure.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/Carolina-Herrera-Good-Girl-EDPS-100ml-300x300_rjdehe.png",tags:"fragrance,womens,premium,gift,popular",ayanda:true},
+  {sku:"062250006",brand:"Scent of Africa",name:"Laika Eau de Parfum 50ml",size:"50ml",price:1440,orig:null,cat:"womens",subcat:"Women's Fragrances",desc:"A love song in scent. Pomegranate, citrus, rose and musk. An exclusive African fragrance available only at OR Tambo.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772535186/SOA-LAIKA-BOTTLE-BOX-577px-300x300_e5s9nk.webp",tags:"fragrance,womens,african,fruity,floral",ayanda:false},
+  // MENS FRAGRANCES
+  {sku:"070045462",brand:"Dolce & Gabbana",name:"K by D&G Eau de Toilette 50ml",size:"50ml",price:1800,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"Masculine. Authentic. Captivating. Inspired by the King of Sicily — cedar, lemon verbena and coumarin for a man of confidence and style.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/Dolce-Gabbana-K-EDTS-50ml_wjlhbn.png",tags:"fragrance,mens,premium",ayanda:false},
+  {sku:"070045461",brand:"Dolce & Gabbana",name:"K by D&G Eau de Toilette 100ml",size:"100ml",price:2460,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"Celebrates a new era of masculinity. Cedar, lemon verbena and coumarin. A larger bottle for the man who commits to his signature scent.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/Dolce-Gabbana-K-EDTS-100ml-300x300_e3qcme.png",tags:"fragrance,mens,premium,gift",ayanda:false},
+  {sku:"070043512",brand:"Issey Miyake",name:"L'Eau D'Issey Homme Intense 75ml",size:"75ml",price:629,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"A luminous, warm and enveloping Eau de Toilette. Fresh cedar, amber and woods. Accessible luxury for the discerning man.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/894698_Issey-Miyake-L-Eau-D-Issey-Homme-Intense_EDTS_MASTER-300x300_y4zttj.jpg",tags:"fragrance,mens,warm",ayanda:false},
+  {sku:"070045379",brand:"Hugo Boss",name:"Boss Bottled Infinite EDP 100ml",size:"100ml",price:2075,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"Navigating success while seeking balance and authenticity. A warm, woody fragrance for the modern man of ambition.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772535187/Boss_Infinite_EDPS_100ml_itlhtf.jpg",tags:"fragrance,mens,premium",ayanda:false},
+  {sku:"070040689",brand:"Carolina Herrera",name:"212 Men Eau de Toilette 100ml",size:"100ml",price:1839,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"Cosmopolitan and urban. The fragrance of New York City's elite. Cedar, white flowers and musk for the modern metropolitan man.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772535186/Caroline-Herrera-212-Men-EDTS-100ml_uw3ujg.png",tags:"fragrance,mens,premium,gift",ayanda:false},
+  {sku:"070045308",brand:"Givenchy",name:"Gentleman Eau de Parfum 100ml",size:"100ml",price:2300,orig:null,cat:"mens",subcat:"Men's Fragrances",desc:"For men who dance to their own beat. An iris-led woody fragrance with warmth and depth — modern masculinity redefined.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772535186/1303870_Givenchy_Gentleman_EDPS_100ml-300x300_l8yxlj.jpg",tags:"fragrance,mens,premium,gift",ayanda:false},
+  // WHISKY
+  {sku:"200040114",brand:"Chivas Regal",name:"18 Year Old Blended Scotch Whisky 1lt",size:"1lt",price:1799,orig:null,cat:"whisky",subcat:"Whisky",desc:"A rich multi-layered blend with over 20 of Scotland's rarest single malts. Honeyed fruit, hazelnut and dark chocolate.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534694/Chivas-Regal-18yr-bottle-300x300_dqnjny.jpg",tags:"whisky,scotch,premium,gift",ayanda:false},
+  {sku:"210260018",brand:"Van Ryn's",name:"20 Year Old Collectors Reserve Brandy 750ml",size:"750ml",price:1635,orig:null,cat:"whisky",subcat:"Brandy",desc:"Collector's Reserve aged 20 years — the pinnacle of South African brandy. A rare trophy spirit from Stellenbosch.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/van-ryns-20-year-old-300x300_chs54g.jpg",tags:"brandy,south african,luxury,gift",ayanda:false},
+  {sku:"200040689",brand:"Togouchi",name:"Premium Japanese Blended Whisky 700ml",size:"700ml",price:1020,orig:null,cat:"whisky",subcat:"Whisky",desc:"Aged in a Japanese railway tunnel. Scottish malt meets Canadian grain in a uniquely smooth and balanced blend.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/OIP-1-e1740124836234-300x300_xrn846.jpg",tags:"whisky,japanese,premium,gift",ayanda:false},
+  {sku:"200040506",brand:"Johnnie Walker",name:"Blue Label 1lt",size:"1lt",price:4395,orig:null,cat:"whisky",subcat:"Whisky",desc:"The pinnacle of blended Scotch whisky craftsmanship. One in every 10,000 casks is exceptional enough for Blue Label.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534694/johnny-walker-blue-label-300x300_d7m9ff.jpg",tags:"whisky,scotch,luxury,gift",ayanda:false},
+  {sku:"200040048",brand:"Chivas Regal",name:"12 Year Old Blended Scotch Whisky 1lt",size:"1lt",price:520,orig:650,cat:"whisky",subcat:"Whisky",desc:"A blend of malt and grain Scotch whiskies matured for at least 12 years. Smooth, rich and endlessly approachable.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/Chivas-Regal-12-year-old-300x300_l5afin.jpg",tags:"whisky,scotch,blended,gift",promo:true,ayanda:false},
+  // VODKA
+  {sku:"240040097",brand:"Belvedere",name:"Vodka 1L",size:"1L",price:835,orig:null,cat:"vodka",subcat:"Vodka",desc:"Polish rye vodka made with zero additives. Certified kosher. Silky smooth with a clean, creamy finish.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/belvedere-vodka-1l-300x300_kpsdhf.jpg",tags:"vodka,premium,polish",ayanda:false},
+  {sku:"240040007",brand:"Absolut",name:"Blue Vodka 1L",size:"1L",price:300,orig:375,cat:"vodka",subcat:"Vodka",desc:"Made from natural Swedish winter wheat. Smooth, versatile and unmistakably clean. The world's most popular vodka.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/Absolut-Blue-1l-300x300_i5wxpp.jpg",tags:"vodka,value,popular",promo:true,ayanda:false},
+  // GIN
+  {sku:"240040002",brand:"Bombay Sapphire",name:"London Dry Gin 1lt",size:"1lt",price:348,orig:435,cat:"gin",subcat:"Gin",desc:"Crafted from a secret 1761 recipe with 10 hand-selected botanicals. Complex and layered with an unmistakable blue bottle.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534692/bombay-sapphire-gin-300x300_znlqph.jpg",tags:"gin,london dry,popular",promo:true,ayanda:false},
+  {sku:"240040004",brand:"Tanqueray",name:"London Dry Gin 1L",size:"1L",price:445,orig:null,cat:"gin",subcat:"Gin",desc:"A classic London dry gin from an almost 180-year-old recipe. Bold juniper, fresh coriander and angelica root.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/Tanqueray-London-Dry-Gin-1L-300x300_duxh6g.jpg",tags:"gin,london dry,classic,popular",ayanda:false},
+  // WINE & CHAMPAGNE
+  {sku:"305900002",brand:"De Toren",name:"Edition Z 750ml",size:"750ml",price:735,orig:null,cat:"wine",subcat:"Red Wine",desc:"Symphonic Bordeaux blend dominated by Merlot. Vibrant dark fruit, cedar and fine tannins from Stellenbosch.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/Edition-Z-2019-in-box-2019_nidbox.jpg",tags:"wine,red,south african,premium,bordeaux",ayanda:false},
+  {sku:"304360211",brand:"Tokara",name:"Director's Reserve Red 750ml",size:"750ml",price:725,orig:null,cat:"wine",subcat:"Red Wine",desc:"Amazing clarity and depth with a zesty persistence. A fine Stellenbosch red blend with incredible complexity.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/Tokara-Directors-Reserve-Red-300x300_bscxky.jpg",tags:"wine,red,south african,premium",ayanda:false},
+  {sku:"308240002",brand:"Rijk's",name:"Private Cellar Pinotage 750ml",size:"750ml",price:455,orig:null,cat:"wine",subcat:"Red Wine",desc:"Elegant red fruit aromas of cherry, strawberry and cranberry. Tulbagh's finest Pinotage — smooth and characterful.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534693/Rijks-Private-Cellar-Pinotage-300x300_tkhjyn.jpg",tags:"wine,pinotage,south african",ayanda:false},
+  {sku:"304380039",brand:"Kaapzicht",name:"Steytler Pinotage 750ml",size:"750ml",price:885,orig:null,cat:"wine",subcat:"Red Wine",desc:"Sweet spice, red plums, black cherries and milk chocolate. One of Stellenbosch's most celebrated Pinotages.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/Kaapzicht-steytler-300x300_pjlplk.jpg",tags:"wine,pinotage,south african,premium",ayanda:false},
+  {sku:"300350019",brand:"Vilafonte",name:"Series C 2021 750ml",size:"750ml",price:2500,orig:null,cat:"wine",subcat:"Red Wine",desc:"Cabernet Sauvignon and Franc blend. Rich and built for longevity — one of South Africa's most collectible reds.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/Vilafonte-Series-C-300x300_hkio8y.jpg",tags:"wine,red,south african,premium,luxury,gift",ayanda:false},
+  {sku:"280040046",brand:"Moët & Chandon",name:"Rosé Impérial Brut Champagne 750ml",size:"750ml",price:1175,orig:null,cat:"wine",subcat:"Champagne",desc:"Spontaneous, radiant and romantic. Red berries, rose and a creamy freshness — the Moët style in its most seductive form.",img:"https://res.cloudinary.com/df99vsdoe/image/upload/v1772534691/moet-chandon-brut-imperial-rose-champagne_01-300x300_m4ljep.jpg",tags:"champagne,french,rose,premium,celebration,gift",ayanda:false},
+];
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let cart = [], wishlist = [], curr = null, activeCat = 'all';
+let urlParams = {};
+
+const fmt = v => 'R' + v.toLocaleString('en-ZA', {minimumFractionDigits:2});
+
+// ══════════════════════════════════════
+// URL PARAMETER HANDLING (chatbot handoff)
+// ══════════════════════════════════════
+function parseURL() {
+  const params = new URLSearchParams(window.location.search);
+  const items = params.get('items');
+  const dest  = params.get('dest');
+  const budget= params.get('budget');
+  if (dest)  urlParams.dest   = decodeURIComponent(dest);
+  if (budget)urlParams.budget = budget;
+  if (items) {
+    const skus = items.split(',');
+    skus.forEach(sku => {
+      const p = PRODUCTS.find(x => x.sku === sku.trim());
+      if (p && !cart.find(c => c.sku === p.sku)) {
+        cart.push({...p, qty:1});
+      }
+    });
+    if (cart.length > 0) {
+      setTimeout(() => {
+        syncCounts();
+        renderCart();
+        goTo('page-cart');
+      }, 100);
+    }
+  }
+}
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+function goTo(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  syncCounts();
+  if (id === 'page-checkout') populateCheckout();
+}
+
+function syncCounts() {
+  const t = cart.reduce((s,i) => s+i.qty, 0);
+  ['cc1','cc2','cc3','cc4'].forEach(id => { const e=document.getElementById(id); if(e)e.textContent=t; });
+  const w = wishlist.length;
+  ['wc1','wc2'].forEach(id => { const e=document.getElementById(id); if(e)e.textContent=w; });
+}
+
+function toast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.style.background = isError ? 'var(--rust)' : 'var(--green)';
+  t.textContent = '✓ ' + msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════════
+// SHOP / CATEGORY
+// ══════════════════════════════════════
+const CAT_LABELS = {
+  all: 'All Products', womens: "Women's Fragrances", mens: "Men's Fragrances",
+  whisky: 'Whisky & Brandy', vodka: 'Vodka', gin: 'Gin', wine: 'Wine & Champagne'
+};
+
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.cattab').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  const label = CAT_LABELS[cat] || cat;
+  document.getElementById('shopPageTitle').textContent = label;
+  document.getElementById('shopPageSub').textContent = cat === 'all'
+    ? 'Browse our full duty-free range at OR Tambo International Airport'
+    : label + ' · OR Tambo International Airport';
+  document.getElementById('shopBcLabel').textContent = label;
+  document.getElementById('shopGridTitle').textContent = label;
+  renderGrid();
+}
+
+function renderGrid() {
+  const filtered = activeCat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCat);
+  document.getElementById('shopcount').textContent =
+    filtered.length + ' product' + (filtered.length !== 1 ? 's' : '') +
+    (filtered.some(p => p.ayanda) ? ' · ⭐ Ayanda picks highlighted' : '');
+
+  document.getElementById('grid').innerHTML = filtered.map(p => {
+    const promo = p.promo ? `<div class="cbadge promo">PROMO</div>` : '';
+    const ay    = p.ayanda ? `<div class="cbadge gold">⭐ Ayanda Pick</div>` : '';
+    const badge = ay || promo || `<div class="cbadge rust">In Stock</div>`;
+    const origHtml = p.orig ? `<span class="corigprice">${fmt(p.orig)}</span>` : '';
+    return `<div class="pcard${p.ayanda?' hl':''}" onclick="loadProduct('${p.sku}')">
+      <div class="cimg">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"
+          onerror="this.style.display='none';this.parentElement.querySelector('.imgfb').style.display='flex'">
+        <div class="imgfb" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#bbb;font-size:11px;text-align:center;padding:12px">${p.brand}<br>${p.size}</div>
+        ${badge}
+      </div>
+      <div class="cbody">
+        <div class="cbrand">${p.brand}</div>
+        <div class="cname">${p.name}</div>
+        <div class="cprices"><span class="cprice">${fmt(p.price)}</span>${origHtml}</div>
+        <div class="csize">${p.size} · ${p.subcat}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// PRODUCT DETAIL
+// ══════════════════════════════════════
+function loadProduct(sku) {
+  const p = PRODUCTS.find(x => x.sku === sku);
+  if (!p) return;
+  curr = p;
+
+  document.getElementById('pbc').textContent = p.brand + ' ' + p.name;
+  document.getElementById('pbrand').textContent = p.brand;
+  document.getElementById('pname').textContent = p.name;
+  document.getElementById('psize').textContent = p.size;
+  document.getElementById('pcat').textContent = p.subcat;
+  document.getElementById('psku').textContent = p.sku;
+  document.getElementById('pdesc').textContent = p.desc;
+  document.getElementById('qty').value = 1;
+
+  // Price display
+  let priceHtml = `<span class="pprice">${fmt(p.price)}</span>`;
+  if (p.orig) priceHtml += `<span class="porigprice">${fmt(p.orig)}</span><span class="psaving">SAVE ${fmt(p.orig - p.price)}</span>`;
+  document.getElementById('pprices').innerHTML = priceHtml;
+  document.getElementById('pstock').textContent = 'In stock · Ready to reserve';
+
+  // Main image
+  const mi = document.getElementById('mainimg');
+  mi.style.opacity = '0';
+  mi.src = p.img;
+  mi.alt = p.name;
+  mi.onerror = function() { this.style.opacity='0.3'; };
+
+  // Badge
+  const gb = document.getElementById('gbadge');
+  if (p.ayanda) { gb.style.display='block'; gb.textContent='⭐ Ayanda Recommends'; gb.className='gbadge'; gb.style.background='var(--gold)'; }
+  else if (p.promo) { gb.style.display='block'; gb.textContent='ON PROMOTION'; gb.className='gbadge'; gb.style.background='var(--green)'; }
+  else { gb.style.display='none'; }
+
+  // Thumbnails (3 views same image for demo)
+  document.getElementById('gthumbs').innerHTML = [0,1,2].map((i) =>
+    `<div class="gthumb${i===0?' on':''}" onclick="selThumb(this,'${p.img}')">
+      <img src="${p.img}" alt="" loading="lazy" onerror="this.style.opacity=.2">
+    </div>`
+  ).join('');
+
+  // Ayanda box
+  const ab = document.getElementById('aybox');
+  if (p.ayanda) {
+    ab.style.display = 'flex';
+    document.getElementById('aytxt').innerHTML =
+      `Ayanda recommended this for you — ${p.brand} is one of our most popular choices at this price point. It fits your preferences and is perfectly suited as a gift.`;
+  } else { ab.style.display = 'none'; }
+
+  refreshWLBtn();
+  const addbtn = document.getElementById('addbtn');
+  addbtn.textContent = 'ADD TO BASKET'; addbtn.className = 'btnadd';
+  goTo('page-product');
+}
+
+function selThumb(el, src) {
+  document.querySelectorAll('.gthumb').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  const mi = document.getElementById('mainimg');
+  mi.style.opacity = '0';
+  mi.src = src;
+}
+
+function chgQ(d) {
+  const i = document.getElementById('qty');
+  i.value = Math.max(1, Math.min(10, +i.value + d));
+}
+
+// ══════════════════════════════════════
+// WISHLIST
+// ══════════════════════════════════════
+function toggleWL() {
+  if (!curr) { toast('Select a product first'); return; }
+  if (wishlist.includes(curr.sku)) {
+    wishlist = wishlist.filter(x => x !== curr.sku);
+    toast('Removed from wishlist');
+  } else {
+    wishlist.push(curr.sku);
+    toast(curr.brand + ' added to wishlist');
+  }
+  refreshWLBtn(); syncCounts();
+}
+
+function refreshWLBtn() {
+  if (!curr) return;
+  const on = wishlist.includes(curr.sku);
+  const btn = document.getElementById('wlbtn');
+  btn.innerHTML = on ? '♥ &nbsp;IN WISHLIST' : '♡ &nbsp;ADD TO WISHLIST';
+  btn.className = on ? 'btnwl on' : 'btnwl';
+}
+
+function openWishlist() {
+  if (wishlist.length === 0) { toast('Your wishlist is empty'); return; }
+  const names = wishlist.map(sku => {
+    const p = PRODUCTS.find(x => x.sku === sku);
+    return p ? p.brand + ' ' + p.name + ' — ' + fmt(p.price) : sku;
+  });
+  alert('Your Wishlist (' + wishlist.length + ' item' + (wishlist.length > 1 ? 's' : '') + '):\n\n' + names.join('\n'));
+}
+
+// ══════════════════════════════════════
+// CART
+// ══════════════════════════════════════
+function addCart() {
+  if (!curr) return;
+  const qty = +document.getElementById('qty').value;
+  const ex = cart.find(i => i.sku === curr.sku);
+  if (ex) ex.qty += qty; else cart.push({...curr, qty});
+  const btn = document.getElementById('addbtn');
+  btn.textContent = '✓ ADDED TO BASKET'; btn.className = 'btnadd done';
+  setTimeout(() => { btn.textContent = 'ADD TO BASKET'; btn.className = 'btnadd'; }, 2000);
+  toast(curr.brand + ' ' + curr.name + ' added');
+  syncCounts(); renderCart();
+  setTimeout(() => goTo('page-cart'), 700);
+}
+
+function renderCart() {
+  const body = document.getElementById('cartbody');
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+
+  if (cart.length === 0) {
+    body.innerHTML = `<div class="empty">
+      <h3>Your basket is empty</h3>
+      <p>Browse our Ayanda-recommended products and add items to your basket.</p>
+      <button class="btncont" onclick="goTo('page-shop')">BROWSE PRODUCTS</button>
+    </div>`;
+    setTot(0); return;
+  }
+
+  let h = `<table class="ctable">
+    <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead>
+    <tbody>`;
+  cart.forEach((item, i) => {
+    h += `<tr>
+      <td><div class="citcell">
+        <div class="cthumb"><img src="${item.img}" alt="${item.name}" onerror="this.style.opacity=.2"></div>
+        <div>
+          <div class="ciname">${item.brand} ${item.name}</div>
+          <div class="cisub">${item.size} · ${item.subcat}</div>
+        </div>
+      </div></td>
+      <td class="cprice">${fmt(item.price)}</td>
+      <td><div class="qctrl" style="width:fit-content">
+        <button onclick="cqty(${i},-1)">−</button>
+        <input type="number" value="${item.qty}" readonly style="width:46px;height:44px;border:none;border-left:1px solid var(--border);border-right:1px solid var(--border);text-align:center;font-size:14px;font-family:'Jost',sans-serif">
+        <button onclick="cqty(${i},1)">+</button>
+      </div></td>
+      <td class="cprice">${fmt(item.price * item.qty)}</td>
+      <td><button class="rmbtn" onclick="rmItem(${i})">✕</button></td>
+    </tr>`;
+  });
+  h += '</tbody></table>';
+  body.innerHTML = h;
+  setTot(total);
+}
+
+function setTot(t) {
+  document.getElementById('ssub').textContent = fmt(t);
+  document.getElementById('stot').textContent = fmt(t);
+  const co = document.getElementById('cotot'); if (co) co.textContent = fmt(t);
+}
+
+function cqty(i, d) { cart[i].qty = Math.max(1, Math.min(10, cart[i].qty + d)); renderCart(); syncCounts(); }
+function rmItem(i) { const n=cart[i].brand; cart.splice(i,1); renderCart(); syncCounts(); toast(n + ' removed'); }
+
+// ══════════════════════════════════════
+// CHECKOUT
+// ══════════════════════════════════════
+function populateCheckout() {
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  // Pre-fill destination from URL param
+  if (urlParams.dest) {
+    document.getElementById('destInput').value = urlParams.dest;
+    document.getElementById('flightprefilltext').innerHTML =
+      `Flying to: <strong>${urlParams.dest}</strong>${urlParams.budget ? ' &nbsp;·&nbsp; Budget: <strong>R' + urlParams.budget + '</strong>' : ''} &nbsp;·&nbsp; Airport: <strong>OR Tambo (JNB)</strong>`;
+  }
+  // Checkout order sidebar
+  let itemsHtml = '';
+  cart.forEach(item => {
+    itemsHtml += `<div class="coitem">
+      <div class="coimg"><img src="${item.img}" alt="${item.name}" onerror="this.style.opacity=.2"></div>
+      <div>
+        <div class="coname">${item.brand} ${item.name}</div>
+        <div class="cosub">${item.size} · Qty: ${item.qty}</div>
+        <div class="coprice">${fmt(item.price * item.qty)}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('coitems').innerHTML = itemsHtml;
+  document.getElementById('cotot').textContent = fmt(total);
+}
+
+function goCheckout() {
+  if (cart.length === 0) { toast('Your basket is empty', true); return; }
+  goTo('page-checkout');
+}
+
+// ══════════════════════════════════════
+// PLACE ORDER
+// ══════════════════════════════════════
+function placeOrder() {
+  const req = {fname:'First Name',lname:'Last Name',email:'Email Address',phone:'Mobile Number',passport:'Passport Number',flight:'Flight Number',depdate:'Departure Date'};
+  for (const [id, label] of Object.entries(req)) {
+    if (!document.getElementById(id).value.trim()) {
+      toast('Please fill in your ' + label, true);
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+  const ref = 'BF-2026-' + Math.floor(10000 + Math.random() * 90000);
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  document.getElementById('confref').textContent = ref;
+  // flight summary
+  const dd = document.getElementById('depdate').value;
+  const ds = dd ? new Date(dd + 'T12:00:00').toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'}) : '';
+  const ts = document.getElementById('deptime').value;
+  const dest = document.getElementById('destInput').value;
+  document.getElementById('confflight').innerHTML =
+    'Flight: <strong>' + document.getElementById('flight').value.toUpperCase() + '</strong><br>' +
+    'Date: ' + ds + (ts ? ' at ' + ts : '') + '<br>Destination: ' + dest;
+  // confirmation items
+  let ciHtml = '';
+  cart.forEach(item => {
+    ciHtml += `<div class="confitem">
+      <div class="confimgbox"><img src="${item.img}" alt="${item.name}" onerror="this.style.opacity=.2"></div>
+      <div class="confdet">
+        <div class="confname">${item.brand} ${item.name}</div>
+        <div class="confsub2">${item.size} · Qty: ${item.qty}</div>
+      </div>
+      <div class="confprice">${fmt(item.price * item.qty)}</div>
+    </div>`;
+  });
+  document.getElementById('confitems').innerHTML = ciHtml;
+  document.getElementById('conftotal').textContent = fmt(total);
+  goTo('page-confirm');
+}
+
+// ══════════════════════════════════════
+// RESET
+// ══════════════════════════════════════
+function resetAll() {
+  cart = []; wishlist = []; curr = null;
+  ['fname','lname','email','phone','passport','flight','depdate','deptime','notes'].forEach(id => {
+    const e = document.getElementById(id); if (e) e.value = '';
+  });
+  renderCart(); syncCounts(); filterCat('all', document.querySelector('.cattab')); goTo('page-shop');
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+parseURL();
+renderGrid();
+renderCart();
+syncCounts();
+</script>
+</body>
+</html>
